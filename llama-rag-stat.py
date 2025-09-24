@@ -68,6 +68,9 @@ class RAGSystem:
         Settings.embed_model = self.embed_model
         Settings.chunk_size = chunk_size
         Settings.chunk_overlap = chunk_overlap
+        # Settings.сhunk_length_to_split_on = lambda doc: ()
+        # Settings.length_function=len
+        Settings.separators=["\n\n", "\n", ". ", "! ", "? ", " ", ""] # Приоритет разделителей
         print('Settings configured')
     
     def _load_documents_and_build_index(self):
