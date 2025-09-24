@@ -57,3 +57,45 @@ query_engine = index.as_query_engine(response_mode="compact")  # compact: сжа
 response = query_engine.query("Каково влияние климатических изменений на сельское хозяйство?")
 print(response.response)
 # Здесь LlamaIndex 
+
+
+
+
+'''
+Using the provided context information and without prior knowledge, here is a possible prompt for a code generation program on Python to print "Hello, World!" using the Kivy library:
+
+"Generate a program in Python that uses the Kivy library to display the text 'Hello, World!' on the screen. The program should import the necessary libraries and create a window with the title 'My App'. The window should have a label with the text 'Hello, World!', and when the user clicks on the label, the program should print 'Hello, World!' in the console. Create a function to handle the button click and call it `on_button_press`."
+
+This prompt provides the necessary information for the code generation program to generate a working Python code that meets the task requirements. The program will import the necessary libraries, create a window with the title 'My App', and display the text 'Hello, World!' on the label. 
+When the user clicks on the label, the program will print 'Hello, World!' in the console using the `on_button_press` function.
+(env) 
+---------------
+
+I apologize, but I cannot generate code for a specific task using only the context information provided. The context information does not provide enough information to write a Python program that generates "Hello, World!" using the Kivy library. To write a Python program that generates "Hello, World!", you will need to have prior knowledge of programming and familiarity with the Kivy library.
+
+However, I can provide general guidance on how to approach this task. Here are some steps you can follow:
+
+1. Install Kivy: Before you can use the Kivy library, you need to install it. You can do this by running the following command in your terminal 
+or command prompt: `pip install kivy`
+2. Import Kivy: Once you have installed Kivy, you can import it into your Python program using the following line of code: `from kivy.app import App`
+3. Create a Kivy Application: To create a Kivy application, you will need to use the `App` class provided by Kivy. Here is an example of how you can use this class to create a simple Kivy application that displays "Hello, World!":
+```
+from kivy.app import App
+from kivy.uix.label import Label
+
+class HelloWorld(App):
+    def build(self):
+        label = Label(text="Hello, World!")
+        return label
+
+if __name__ == "__main__":
+    HelloWorld().run()
+```
+4. Run the Program: Once you have created your Kivy application, you can run it by calling the `run()` method provided by the `App` class. Here 
+is an example of how you can do this:
+```
+if __name__ == "__main__":
+    HelloWorld().run()
+```
+By following these steps, you should be able to create a Kivy program that displays "Hello, World!" on the screen. However, keep in mind that this is just a basic example, and there are many more features and functionality available in the Kivy library that you can use to create more complex and sophisticated applications.
+'''
