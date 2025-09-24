@@ -41,3 +41,17 @@ $ python llama-rag-stat.py "mxbai-embed-large" "llama3.1" "Используя и
 Системная информация: {'ollama_url': 'http://127.0.0.1:11434', 'docs_directory': 'docs/', 'embedding_model': 'mxbai-embed-large', 'llm_model': 'llama3.1', 'documents_loaded': 1, 'index_initialized': True, 'total_queries': 0}
 Ответ 1: 2.2
 Выполнялось:  12.457962989807129
+
+python llama-rag-stat.py "all-minilm" "mistral" "Используя исходные документы, выбери номер темы, котор
+ый больше всего подходит по частотному анализу слов для текста: 'Отсутствует водоснабжение'. Ответ предос 
+тавь только номер темы."
+=== Инициализация RAG системы ===
+Ollama URL: http://127.0.0.1:11434
+Embedding model: all-minilm initialized
+LLM model: mistral initialized
+Settings configured
+Loaded 1 documents from docs/ in 0.03 seconds
+Vector index built in 0.23 seconds
+Системная информация: {'ollama_url': 'http://127.0.0.1:11434', 'docs_directory': 'docs/', 'embedding_model': 'all-minilm', 'llm_model': 'mistral', 'documents_loaded': 1, 'index_initialized': True, 'total_queries': 0}
+Ответ 1:  2.2 (отсутствие водоснабжения)
+Выполнялось:  1.5262219905853271
