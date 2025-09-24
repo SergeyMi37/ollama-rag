@@ -1,4 +1,4 @@
-import os
+import os, sys
 import time
 from datetime import timedelta
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
@@ -99,7 +99,7 @@ class RAGSystem:
         similarity_top_k: int = 3,
         timeout: float = 600.0,
         response_mode: ResponseMode = ResponseMode.COMPACT,
-        verbose: bool = True
+        verbose: bool = False
     ) -> dict:
         """
         Выполняет запрос к RAG системе с измерением скорости.
@@ -281,57 +281,69 @@ def create_rag_system(
 
 # Примеры использования:
 if __name__ == "__main__":
+    # Если вызвано из командной строки с аргументами
+    if len(sys.argv) > 2:
+        embedding_model = sys.argv[1]
+        llm_model = sys.argv[2]
+        prompt_text = sys.argv[3]
+    else:
+        # По умолчанию
+        embedding_model="nomic-embed-text"
+        llm_model="llama2"
+        prompt_text = "Используя исходные документы, выбери номер темы, который больше всего подходит по частотному анализу слов для текста: 'Отсутствует водоснабжение'. В Ответ предоставь только номер темы."
+
     # Инициализация системы один раз
     print("=== Инициализация RAG системы ===")
     rag_system = RAGSystem(
-        docs_directory="docs/",
-        embedding_model="nomic-embed-text", 
-        llm_model="llama2"
+        embedding_model=embedding_model, 
+        llm_model=llm_model
     )
-    
+
     # Проверка информации о системе
     info = rag_system.get_system_info()
     print("Системная информация:", info)
     
-    print("\n=== Выполнение нескольких запросов ===")
+    # print("\n=== Выполнение нескольких запросов ===")
     
     # Первый запрос
     result1 = rag_system.query(
-        prompt_text="Используя исходные документы, выбери номер темы, который больше всего подходит по частотному анализу слов для текста: 'Отсутствует водоснабжение'. Ответ предоставь на русском.",
+        prompt_text=prompt_text,
         temperature=0,
         max_tokens=1000
     )
+    # Вывод общей статистики
+    # rag_system.print_detailed_stats()
+
     print("Ответ 1:", result1["response"])
+    print('Выполнялось: ',result1["metrics"]["query_execution_time"])
     
     # Второй запрос
-    result2 = rag_system.query(
-        prompt_text="Кратко summarise основные темы из документов.",
-        temperature=0.1,
-        max_tokens=500
-    )
-    print("Ответ 2:", result2["response"])
+    # result2 = rag_system.query(
+    #     prompt_text="Кратко summarise основные темы из документов.",
+    #     temperature=0.1,
+    #     max_tokens=500
+    # )
+    # print("Ответ 2:", result2["response"])
     
-    # Третий запрос с другими параметрами
-    result3 = rag_system.query(
-        prompt_text="Найди информацию о конкретных технологиях или методах.",
-        similarity_top_k=5,
-        temperature=0.2
-    )
-    print("Ответ 3:", result3["response"])
+    # # Третий запрос с другими параметрами
+    # result3 = rag_system.query(
+    #     prompt_text="Найди информацию о конкретных технологиях или методах.",
+    #     similarity_top_k=5,
+    #     temperature=0.2
+    # )
+    # print("Ответ 3:", result3["response"])
     
-    # Пакетная обработка запросов
-    print("\n=== Пакетная обработка ===")
-    prompts = [
-        "Какие основные проблемы обсуждаются в документах?",
-        "Какие решения предлагаются?",
-        "Кто является целевой аудиторией документов?"
-    ]
+    # # Пакетная обработка запросов
+    # print("\n=== Пакетная обработка ===")
+    # prompts = [
+    #     "Какие основные проблемы обсуждаются в документах?",
+    #     "Какие решения предлагаются?",
+    #     "Кто является целевой аудиторией документов?"
+    # ]
     
-    batch_results = rag_system.batch_query(
-        prompts,
-        temperature=0.1,
-        max_tokens=800
-    )
+    # batch_results = rag_system.batch_query(
+    #     prompts,
+    #     temperature=0.1,
+    #     max_tokens=800
+    # )
     
-    # Вывод общей статистики
-    rag_system.print_detailed_stats()
